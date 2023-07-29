@@ -6,6 +6,9 @@ import os
 from PIL import Image
 import cv2
 import numpy as np
+
+
+print(os.listdir('user_network'))
 def define_doc_state(doc):
     reader = easyocr.Reader(['ru'],
                             model_storage_directory='model',
@@ -13,31 +16,21 @@ def define_doc_state(doc):
                             recog_network='custom_example')
 
     print(doc.name)
-    image = cv2.imread(doc.name, cv2.COLOR_BGR2GRAY)
-    image = cv2.resize(image,(600,100),interpolation=Image.ANTIALIAS)
-    cv2.imwrite(doc.name, image)
-    result = reader.readtext(doc.name, allowlist='(),.ӔӕАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ-',detail =0,paragraph=False)
-    st.write(result)
+    img = cv2.imread(doc.name, cv2.COLOR_BGR2GRAY)
+    img = cv2.resize(img,(600,100),interpolation=Image.ANTIALIAS)
+    cv2.imwrite(doc.name, img)
+    result = reader.readtext(doc.name, allowlist='(),.ӔӕАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ-',paragraph=False)
+    st.write(result[0][1])
 
-    lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
+    top_left = tuple(result[0][0][0])
+    bottom_right = tuple(result[0][0][2])
+    text = result[0][1]
+    font = cv2.FONT_HERSHEY_SIMPLEX
 
-    # threshold on A-channel
-    r, th = cv2.threshold(lab[:, :, 1], 125, 255, cv2.THRESH_BINARY_INV)
+    img = cv2.rectangle(img, top_left, bottom_right, (0, 255, 0), 3)
+    img = cv2.putText(img, 'text', top_left, font, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
 
-    # create copy of cropped image
-    crop_img2 = image.copy()
-
-    # draw only first 5 results for clarity
-    # borrowed from: https://pyimagesearch.com/2020/09/14/getting-started-with-easyocr-for-optical-character-recognition/
-    for (bbox, text, prob) in result[:5]:
-        (tl, tr, br, bl) = bbox
-        tl = (int(tl[0]), int(tl[1]))
-        tr = (int(tr[0]), int(tr[1]))
-        br = (int(br[0]), int(br[1]))
-        bl = (int(bl[0]), int(bl[1]))
-        crop_img2 = cv2.rectangle(crop_img2, tl, br, (0, 0, 255), 3)
-        crop_img2 = cv2.putText(crop_img2, text, (tl[0], tl[1] - 20), cv2.FONT_HERSHEY_SIMPLEX, 1.1, (0, 0, 0), 5)
-    st.image(crop_img2, caption='Detection')
+    st.image(img, caption='Detection')
 
 uploaded_file = st.file_uploader("Выберите файл", type=[".JPG", ".jpg", ".png",], accept_multiple_files=False)
 if uploaded_file:
