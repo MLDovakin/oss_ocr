@@ -1,5 +1,4 @@
 import os
-import sys
 import torch
 import pandas  as pd
 import yaml
@@ -7,13 +6,13 @@ import yaml
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-from EasyOCR.trainer.utils import AttnLabelConverter
-from EasyOCR.trainer.model import Model
+from oss_ocr.EasyOCR.trainer.utils import AttnLabelConverter
+from oss_ocr.EasyOCR.trainer.model import Model
 import torch
 from collections import OrderedDict
 from oss_ocr.EasyOCR.trainer.dataset import AlignCollate
 import torch.nn.functional as F
-from EasyOCR.trainer.utils import AttrDict
+from oss_ocr.EasyOCR.trainer.utils import AttrDict
 
 
 
