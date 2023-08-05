@@ -8,7 +8,6 @@ import pandas  as pd
 import torch.nn.functional as F
 import yaml
 from collections import OrderedDict
-from natsort import natsorted
 from PIL import Image
 import numpy as np
 from torch.utils.data import Dataset, ConcatDataset, Subset
