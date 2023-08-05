@@ -1,18 +1,9 @@
 import os
 import sys
-import re
-import six
-import math
 import torch
 import pandas  as pd
-import torch.nn.functional as F
 import yaml
-from collections import OrderedDict
-from PIL import Image
-import numpy as np
-from torch.utils.data import Dataset, ConcatDataset, Subset
-from torch._utils import _accumulate
-import torchvision.transforms as transforms
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
@@ -20,7 +11,7 @@ from EasyOCR.trainer.utils import AttnLabelConverter
 from EasyOCR.trainer.model import Model
 import torch
 from collections import OrderedDict
-from EasyOCR.trainer.dataset import AlignCollate
+from oss_ocr.EasyOCR.trainer.dataset import AlignCollate
 import torch.nn.functional as F
 from EasyOCR.trainer.utils import AttrDict
 
