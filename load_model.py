@@ -6,13 +6,13 @@ import yaml
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-from ocr_sub.EasyOCR.trainer.utils import AttnLabelConverter
-from ocr_sub.EasyOCR.trainer.model import Model
+from ocr_submodule.trainer.utils import AttnLabelConverter
+from ocr_submodule.trainer.model import Model
 import torch
 from collections import OrderedDict
-from ocr_sub.EasyOCR.trainer.dataset import AlignCollate
+from ocr_submodule.trainer.dataset import AlignCollate
 import torch.nn.functional as F
-from ocr_sub.EasyOCR.trainer.utils import AttrDict
+from ocr_submodule.trainer.utils import AttrDict
 
 
 
