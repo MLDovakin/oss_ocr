@@ -9,7 +9,7 @@ from load_model import load_model, get_config, inference
 
 import numpy as np
 
-opt=get_config('./en_filtered_config_t.yaml')
+opt=get_config('en_filtered_config_t.yaml')
 model=load_model('best_accuracy_t.pth',opt=opt)
 
 
