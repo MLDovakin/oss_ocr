@@ -9,4 +9,5 @@ python-bidi
 PyYAML
 Shapely
 pyclipper
+natsort==8.4.0
 ninja
