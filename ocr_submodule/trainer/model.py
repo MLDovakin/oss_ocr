@@ -3,7 +3,7 @@ from ocr_submodule.trainer.modules.transformation import TPS_SpatialTransformerN
 from ocr_submodule.trainer.modules.feature_extraction import VGG_FeatureExtractor, RCNN_FeatureExtractor, ResNet_FeatureExtractor
 from ocr_submodule.trainer.modules.sequence_modeling import BidirectionalLSTM
 from ocr_submodule.trainer.modules.prediction import Attention
-
+#
 class Model(nn.Module):
 
     def __init__(self, opt):
