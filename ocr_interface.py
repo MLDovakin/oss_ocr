@@ -7,19 +7,26 @@ from PIL import Image
 import cv2
 from load_model import load_model, get_config, inference
 
+import easyocr
 import numpy as np
 
-opt=get_config('en_filtered_config_t.yaml')
+opt=get_config('./en_filtered_config_t.yaml')
 model=load_model('best_accuracy_t.pth',opt=opt)
+reader = easyocr.Reader( lang_list=['ru'],) # this needs to run only once to load the model into memory
 
 
 def define_doc_state(doc):
 
-    img = Image.open(doc.name).convert('RGB').resize((600, 100)).convert('L')
-    q = inference(model, img, opt)
+    result = reader.readtext(doc.name)
+    img = cv2.imread(doc.name)
+    for (coord, text, prob) in result:
+        st.image(img, caption='Detection')
+        (topleft, topright, bottomright, bottomleft) = coord
+        tx, ty = (int(topleft[0]), int(topleft[1]))
+        bx, by = (int(bottomright[0]), int(bottomright[1]))
+        q = Image.fromarray(img[ty:by, tx:bx]).convert('RGB').resize((600, 100)).convert('L')
+        st.write(inference(model, q, opt))
 
-    st.write(q)
-    st.image(img, caption='Detection')
 
 uploaded_file = st.file_uploader("Выберите файл", type=[".JPG", ".jpg", ".png",], accept_multiple_files=False)
 if uploaded_file:
