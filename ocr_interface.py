@@ -19,8 +19,8 @@ def define_doc_state(doc):
 
     result = reader.readtext(doc.name)
     img = cv2.imread(doc.name)
+    st.image(img, caption='Detection')
     for (coord, text, prob) in result:
-        st.image(img, caption='Detection')
         (topleft, topright, bottomright, bottomleft) = coord
         tx, ty = (int(topleft[0]), int(topleft[1]))
         bx, by = (int(bottomright[0]), int(bottomright[1]))
