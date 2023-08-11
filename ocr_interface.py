@@ -24,7 +24,7 @@ def define_doc_state(doc):
         (topleft, topright, bottomright, bottomleft) = coord
         tx, ty = (int(topleft[0]), int(topleft[1]))
         bx, by = (int(bottomright[0]), int(bottomright[1]))
-        q = Image.fromarray(img[ty:by, tx:bx]).convert('RGB').resize((600, 100)).convert('L')
+        q = Image.fromarray(img[ty:by, tx:bx]).convert('RGB').resize((600, 200)).convert('L')
         st.write(inference(model, q, opt))
 
 
