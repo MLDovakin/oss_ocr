@@ -23,9 +23,6 @@ def define_doc_state(doc):
     img = cv2.imread(doc.name)
     st.image(img, caption='Detection')
 
-    q = Image.fromarray(img).convert('RGB').resize((600, 100)).convert('L')
-    q.save(doc.name)
-
     result = reader.readtext(doc.name)
     words = ' '.join([''.join(i.replace('~',' ')) for i in result])
     
