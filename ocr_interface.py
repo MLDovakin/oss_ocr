@@ -28,8 +28,8 @@ def define_doc_state(doc):
 
     result = reader.readtext(doc.name)
     words = ' '.join([''.join(i.replace('~',' ')) for i in result])
-    pred = get_spell(words)
-    st.write(pred)
+    
+    st.write(words)
  
 
 uploaded_file = st.file_uploader("Выберите файл", type=[".JPG", ".jpg", ".png",], accept_multiple_files=False)
