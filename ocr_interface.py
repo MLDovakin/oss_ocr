@@ -9,24 +9,28 @@ from load_model import load_model, get_config, inference
 
 import easyocr
 import numpy as np
+from spell_words import get_spell
 
 opt=get_config('./en_filtered_config_t.yaml')
 model=load_model('best_accuracy_t.pth',opt=opt)
-reader = easyocr.Reader( lang_list=['ru'],) # this needs to run only once to load the model into memory
 
+reader = easyocr.Reader(['en'],
+                        model_storage_directory='model',
+                        user_network_directory='user_network',
+                        recog_network='custom_example')
 
 def define_doc_state(doc):
-
-    result = reader.readtext(doc.name)
     img = cv2.imread(doc.name)
     st.image(img, caption='Detection')
-    for (coord, text, prob) in result:
-        (topleft, topright, bottomright, bottomleft) = coord
-        tx, ty = (int(topleft[0]), int(topleft[1]))
-        bx, by = (int(bottomright[0]), int(bottomright[1]))
-        q = Image.fromarray(img[ty:by, tx:bx]).convert('RGB').resize((600, 200)).convert('L')
-        st.write(inference(model, q, opt))
 
+    q = Image.fromarray(img).convert('RGB').resize((600, 100)).convert('L')
+    q.save(doc.name)
+
+    result = reader.readtext(doc.name)
+    words = ' '.join([''.join(i.replace('~',' ')) for i in result])
+    pred = get_spell(words)
+    st.write(pred)
+ 
 
 uploaded_file = st.file_uploader("Выберите файл", type=[".JPG", ".jpg", ".png",], accept_multiple_files=False)
 if uploaded_file:
