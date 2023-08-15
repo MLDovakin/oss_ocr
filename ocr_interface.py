@@ -14,7 +14,7 @@ from spell_words import get_spell
 opt=get_config('./en_filtered_config_t.yaml')
 model=load_model('best_accuracy_t.pth',opt=opt)
 
-reader = easyocr.Reader(['en'],
+reader = easyocr.Reader(['ru'],
                         model_storage_directory='model',
                         user_network_directory='user_network',
                         recog_network='custom_example')
@@ -24,7 +24,7 @@ def define_doc_state(doc):
     st.image(img, caption='Detection')
 
     result = reader.readtext(doc.name)
-    words = ' '.join([''.join(i.replace('~',' ')) for i in result])
+    words = ' '.join([''.join(i[0].replace('~',' ')) for i in result])
     
     st.write(words)
  
