@@ -24,7 +24,7 @@ def define_doc_state(doc):
     st.image(img, caption='Detection')
 
     result = reader.readtext(doc.name)
-    words = ' '.join([''.join(i[0].replace('~',' ')) for i in result])
+    words = ' '.join([''.join(i[1].replace('~',' ')) for i in result])
     
     st.write(words)
  
