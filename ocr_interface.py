@@ -18,7 +18,7 @@ reader = easyocr.Reader(['ru'],
                         model_storage_directory='model',
                         user_network_directory='user_network',
                         recog_network='custom_example')
-@st.cache_data
+
 def define_doc_state(doc):
     img = cv2.imread(doc.name)
     st.image(img, caption='Detection')
