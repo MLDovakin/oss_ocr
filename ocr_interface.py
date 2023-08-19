@@ -20,7 +20,10 @@ reader = easyocr.Reader(['ru'],
                         recog_network='custom_example')
 
 def define_doc_state(doc):
-    img = cv2.imread(doc.name).resize(img, (600, 100), interpolation = cv2.INTER_AREA)
+    img = cv2.imread(doc.name)
+    
+    q = Image.fromarray(img).convert('RGB').convert('L').resize((600,100))
+    q.save(doc.name)
 
     st.image(img, caption='Detection')
 
@@ -46,5 +49,3 @@ if uploaded_file:
          #res_image = PIL.Image.open(uploaded_file.name)
 
          #st.image(res_image, caption='Detection')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
