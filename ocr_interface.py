@@ -22,8 +22,6 @@ reader = easyocr.Reader(['ru'],
 def define_doc_state(doc):
     img = cv2.imread(doc.name)
     
-    q = Image.fromarray(img).convert('RGB').convert('L').resize((600,100))
-    q.save(doc.name)
 
     st.image(img, caption='Detection')
 
