@@ -20,7 +20,8 @@ reader = easyocr.Reader(['ru'],
                         recog_network='custom_example')
 
 def define_doc_state(doc):
-    img = cv2.imread(doc.name)
+    img = cv2.imread(doc.name).resize(img, (600, 100), interpolation = cv2.INTER_AREA)
+
     st.image(img, caption='Detection')
 
     result = reader.readtext(doc.name)
