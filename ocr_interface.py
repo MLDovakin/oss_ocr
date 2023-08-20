@@ -26,9 +26,9 @@ def define_doc_state(doc):
     st.image(img, caption='Detection')
 
     result = reader.readtext(doc.name)
-    words = ' '.join(['\n'.join(i[1].replace('~',' ').replace('-',',')) for i in result])
+    for i in result:
+      st.write(i[1].replace('~',' ').replace('-',','))
     
-    st.write(words)
  
 
 uploaded_file = st.file_uploader("Выберите файл", type=[".JPG", ".jpg", ".png",], accept_multiple_files=False)
