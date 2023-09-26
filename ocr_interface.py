@@ -52,7 +52,8 @@ if uploaded_file:
 
 st.title('Введите текст для проверки орфографии')
 
-hobj = hunspell.HunSpell('./os_dict/os_OS.dic', './os_dict/os_OS.aff')
+hobj = hunspell.HunSpell()
+hobj.add_dic('./os_dict/os_OS.dic')
 words_st = st.text_input('Текст на осетинском/дигорском ', 'Ӕлгъуыз')
 
 if st.button('Исправить'):
