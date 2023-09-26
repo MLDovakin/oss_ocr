@@ -10,6 +10,8 @@ from load_model import load_model, get_config, inference
 import easyocr
 import numpy as np
 from spell_words import get_spell
+import hunspell
+
 
 opt=get_config('./en_filtered_config_t.yaml')
 model=load_model('best_accuracy_t.pth',opt=opt)
@@ -47,3 +49,20 @@ if uploaded_file:
          #res_image = PIL.Image.open(uploaded_file.name)
 
          #st.image(res_image, caption='Detection')
+
+st.title('Введите текст для проверки орфографии')
+
+hobj = hunspell.HunSpell('./os_dict/os_OS.dic', './os_dict/os_OS.aff')
+words_st = st.text_input('Текст на осетинском/дигорском ', 'Ӕлгъуыз')
+
+if st.button('Исправить'):
+
+    if words_st:
+        words = words_st.split(' ')
+        for i in range(len(words)):
+            sp = hobj.spell(words[i])
+            if sp != True:
+                print(st.write(f"слово с ошибкой : :red[{words[i]}]"))
+                words[i] = hobj.suggest(words[i])[0]
+        st.write(' '.join(words))
+
