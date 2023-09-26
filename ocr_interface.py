@@ -10,7 +10,8 @@ from load_model import load_model, get_config, inference
 import easyocr
 import numpy as np
 from spell_words import get_spell
-import hunspell
+from hunspell import Hunspell
+
 
 
 opt=get_config('./en_filtered_config_t.yaml')
@@ -52,7 +53,7 @@ if uploaded_file:
 
 st.title('Введите текст для проверки орфографии')
 
-hobj = hunspell.HunSpell()
+hobj = HunSpell()
 hobj.add_dic('./os_dict/os_OS.dic')
 words_st = st.text_input('Текст на осетинском/дигорском ', 'Ӕлгъуыз')
 
