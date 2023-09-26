@@ -56,7 +56,7 @@ st.title('Введите текст для проверки орфографии
 
 hobj = HunSpell()
 #hobj.add_dic('./os_dict/os_OS.dic')
-words_st = st.text_input('Текст на осетинском/дигорском ', 'Ӕлгъуыз')
+words_st = st.text_area('Текст на осетинском/дигорском ', 'Ӕлгъуыз')
 
 if st.button('Исправить'):
 
