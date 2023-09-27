@@ -16,7 +16,7 @@ import hunspell
 st.title('Проверка орфографии дигорского языка')
 
 hobj = hunspell.HunSpell('./os_dict/dig_os_OS.dic', './os_dict/dig_os_OS.aff')
-words_st = st.text_area('Введите текст ', 'Ӕлгъуыз')
+words_st = st.text_area('Введите текст ')
 
 if st.button('Исправить'):
 
