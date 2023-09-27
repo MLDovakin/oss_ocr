@@ -13,7 +13,7 @@ from spell_words import get_spell
 import hunspell
 
 
-st.title('Введите текст для проверки орфографии')
+st.title('Проверка орфографии дигорского языка')
 
 hobj = hunspell.HunSpell('./os_dict/dig_os_OS.dic', './os_dict/dig_os_OS.aff')
 words_st = st.text_area('Текст на дигорском ', 'Ӕлгъуыз')
