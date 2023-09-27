@@ -11,7 +11,7 @@ import easyocr
 import numpy as np
 from spell_words import get_spell
 import hunspell
- 
+import re
 
 st.title('Проверка орфографии дигорского языка')
 
@@ -25,6 +25,7 @@ if st.button('Исправить'):
         for i in range(len(words)):
 
             try:
+                words[i] =  re.sub(r'[^\w\s]', '', words[i])
                 sp = hobj.spell(words[i])
                 if sp != True:
                     w = ', '.join(hobj.suggest(words[i]))
