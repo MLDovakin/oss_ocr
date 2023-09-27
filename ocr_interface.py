@@ -26,5 +26,6 @@ if st.button('Исправить'):
             sp = hobj.spell(words[i])
             if sp != True:
                 w  = hobj.suggest(words[i])[0]
-                st.write(f"Слово с ошибкой : :red[{words[i]}] \n Правильный вариант : :green[{w}] ")
+                st.text(f"Слово с ошибкой : :red[{words[i]}]")
+                st.text(f'Правильный вариант : :green[{w}]') 
                 st.text("")
