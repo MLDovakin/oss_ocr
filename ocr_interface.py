@@ -9,8 +9,6 @@ from load_model import load_model, get_config, inference
 
 import easyocr
 import numpy as np
-from spell_words import get_spell
-from hunspell import Hunspell
 
 
 
