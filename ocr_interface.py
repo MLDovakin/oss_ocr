@@ -26,8 +26,8 @@ if st.button('Исправить'):
          
             try: 
               sp = hobj.spell(words[i])
-            except:
-              print(f'Слова {words[i]} нет в словаре')
+            except IndexError:
+              st.write(f'Слова {words[i]} нет в словаре')
              
             if sp != True:
                 w  = hobj.suggest(words[i])[0]
