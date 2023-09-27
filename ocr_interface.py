@@ -23,16 +23,14 @@ if st.button('Исправить'):
     if words_st:
         words = words_st.split(' ')
         for i in range(len(words)):
-         
-            try: 
-              sp = hobj.spell(words[i])
+
+            try:
+                sp = hobj.spell(words[i])
+                if sp != True:
+                    w = ' '.join(hobj.suggest(words[i]))
+                    st.write(f"Слово с ошибкой : :red[{words[i]}]")
+                    st.write(f'Возможный вариант : :green[{w}]')
+                    st.text("")
             except IndexError:
-              st.write(f'Слова {words[i]} нет в словаре')
-             
-            if sp != True:
-                w  = hobj.suggest(words[i])[0]
-                st.write(f"Слово с ошибкой : :red[{words[i]}]")
-                st.write(f'Правильный вариант : :green[{w}]') 
-                st.text("")
-            
+                st.write(f'Слова {words[i]} нет в словаре')
               
