@@ -51,20 +51,3 @@ if uploaded_file:
 
          #st.image(res_image, caption='Detection')
 
-st.title('Введите текст для проверки орфографии')
-
-
-hobj = HunSpell()
-#hobj.add_dic('./os_dict/os_OS.dic')
-words_st = st.text_area('Текст на осетинском/дигорском ', 'Ӕлгъуыз')
-
-if st.button('Исправить'):
-
-    if words_st:
-        words = words_st.split(' ')
-        for i in range(len(words)):
-            sp = hobj.spell(words[i])
-            if sp != True:
-                print(st.write(f"слово с ошибкой : :red[{words[i]}]"))
-                words[i] = hobj.suggest(words[i])[0]
-        st.write(' '.join(words))
