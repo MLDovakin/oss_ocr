@@ -11,7 +11,7 @@ import easyocr
 import numpy as np
 from spell_words import get_spell
 import hunspell
-
+ 
 
 st.title('Проверка орфографии дигорского языка')
 
