@@ -16,7 +16,7 @@ import re
 st.title('Проверка орфографии дигорского языка')
 
 hobj = hunspell.HunSpell('./os_dict/dig_os_OS.dic', './os_dict/dig_os_OS.aff')
-words_st = st.text_area('Введите текст ')
+words_st = st.text_area('Введите текст ', height=250)
 
 if st.button('Исправить'):
 
