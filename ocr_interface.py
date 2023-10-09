@@ -9,6 +9,8 @@ from load_model import load_model, get_config, inference
 import torch
 import easyocr
 import numpy as np
+import gc
+
 
 
 
