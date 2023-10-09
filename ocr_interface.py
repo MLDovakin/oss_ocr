@@ -12,18 +12,18 @@ import numpy as np
 
 
 
-opt=get_config('./en_filtered_config_t.yaml')
-model=load_model('best_accuracy_t.pth',opt=opt)
 
-reader = easyocr.Reader(['ru'],
-                        model_storage_directory='model',
-                        user_network_directory='user_network',
-                        recog_network='custom_example')
 
 def define_doc_state(doc):
     img = cv2.imread(doc.name)
     
-
+    opt=get_config('./en_filtered_config_t.yaml')
+    model=load_model('best_accuracy_t.pth',opt=opt)
+    
+    reader = easyocr.Reader(['ru'],
+                            model_storage_directory='model',
+                            user_network_directory='user_network',
+                            recog_network='custom_example')
     st.image(img, caption='Detection')
 
     result = reader.readtext(doc.name)
@@ -31,7 +31,7 @@ def define_doc_state(doc):
       st.write(i[1].replace('~',' ').replace('-',','))
     torch.cuda.empty_cache()
     gc.collect()
- 
+    del model, reader 
 
 uploaded_file = st.file_uploader("Выберите файл", type=[".JPG", ".jpg", ".png",], accept_multiple_files=False)
 if uploaded_file:
@@ -44,6 +44,7 @@ if uploaded_file:
     cv2.imwrite(save_path, img_arr)
     
     if define_button_state:
+      
          define_doc_state(uploaded_file)
 
          #res_image = PIL.Image.open(uploaded_file.name)
