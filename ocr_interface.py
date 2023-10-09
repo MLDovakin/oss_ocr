@@ -29,7 +29,8 @@ def define_doc_state(doc):
     result = reader.readtext(doc.name)
     for i in result:
       st.write(i[1].replace('~',' ').replace('-',','))
-    
+    torch.cuda.empty_cache()
+    gc.collect()
  
 
 uploaded_file = st.file_uploader("Выберите файл", type=[".JPG", ".jpg", ".png",], accept_multiple_files=False)
@@ -41,7 +42,7 @@ if uploaded_file:
     print(save_path)
     img_arr = cv2.imdecode(np.frombuffer(uploaded_file.getvalue(), np.uint8), cv2.IMREAD_UNCHANGED,)
     cv2.imwrite(save_path, img_arr)
-
+    
     if define_button_state:
          define_doc_state(uploaded_file)
 
