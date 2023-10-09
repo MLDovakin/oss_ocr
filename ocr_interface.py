@@ -6,7 +6,7 @@ import os
 from PIL import Image
 import cv2
 from load_model import load_model, get_config, inference
-
+import torch
 import easyocr
 import numpy as np
 
