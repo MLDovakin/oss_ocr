@@ -56,7 +56,7 @@ if uploaded_file:
 
          #st.image(res_image, caption='Detection')
 
-st.markdown("<h1 style='text-align: center; font-size:20px; font-weight: normal;'>Конвертирование pdf, djvu,  и тд в формат TXT</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование pdf, djvu,  и тд в формат TXT</h1>", unsafe_allow_html=True)
 
 pdf_uploaded_file = st.file_uploader("Выберите PDF файл", type=[".pdf",], accept_multiple_files=False)
  
