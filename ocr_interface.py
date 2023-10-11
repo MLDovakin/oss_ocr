@@ -67,8 +67,7 @@ if pdf_uploaded_file:
     text = ''
     for i in range(0, number_of_pages):
       page = pdf_reader.pages[i]
-      text += '\n' + '\n'.join(page.extract_text().replace('ё','ӕ').replace('Ё','Ӕ'))
-
+      text +=  page.extract_text().replace('ё','ӕ').replace('Ё','Ӕ')
     st.download_button('Скачать текст', text)
     del text
     del pdf_reader
