@@ -54,7 +54,7 @@ if uploaded_file:
 
          #st.image(res_image, caption='Detection')
 
-st.title('Конвертирование PDF, DjVu в формат txt')
+st.title('Конвертирование PDF, DjVu в формат TXT')
 
 pdf_uploaded_file = st.file_uploader("Выберите PDF файл", type=[".pdf",], accept_multiple_files=False)
  
