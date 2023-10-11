@@ -57,7 +57,7 @@ if uploaded_file:
 st.write('Перевод PDF/DJVU файлов в текстовый документ')
 
 pdf_uploaded_file = st.file_uploader("Выберите PDF файл", type=[".pdf",], accept_multiple_files=False)
-
+ 
 if pdf_uploaded_file:
     with open(pdf_uploaded_file.name, 'wb') as f:
         f.write(pdf_uploaded_file.read())
