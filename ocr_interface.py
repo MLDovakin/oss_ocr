@@ -54,16 +54,18 @@ if uploaded_file:
 
          #st.image(res_image, caption='Detection')
 
+st.write('Перевод PDF/DJVU файлов в текстовый документ')
 
-st.write('Перевод файлов в текстовый документ')
+pdf_uploaded_file = st.file_uploader("Выберите PDF файл", type=[".pdf",], accept_multiple_files=False)
 
-pdf_uploaded_file = st.file_uploader("Выберите файл", type=[".pdf",], accept_multiple_files=False)
 if pdf_uploaded_file:
-
+    with open(pdf_uploaded_file.name, 'wb') as f:
+        f.write(pdf_uploaded_file.read())
     pdf_reader = PdfReader(pdf_uploaded_file.name)
+
     number_of_pages = len(pdf_reader.pages)
     text = ''
-    for i in range(len(number_of_pages)):
+    for i in range(0, number_of_pages):
       page = pdf_reader.pages[i]
       text += '\n' + '\n'.join(page.extract_text().replace('ё','ӕ').replace('Ё','Ӕ'))
 
@@ -71,5 +73,3 @@ if pdf_uploaded_file:
     del text
     del pdf_reader
     del number_of_pages
-
-
