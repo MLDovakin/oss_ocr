@@ -16,7 +16,7 @@ from pypdf import PdfReader
 
 
 
-st.markdown("<h1 style='text-align: start; font-size:35px; font-weight: normal;'>OCR дигорского языка</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: start; font-size:35px; font-weight: normal;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
 
 def define_doc_state(doc):
@@ -56,7 +56,7 @@ if uploaded_file:
 
          #st.image(res_image, caption='Detection')
 
-
+st.subheader('Конвертирование PDF, DjVu в формат TXT')
 pdf_uploaded_file = st.file_uploader("Выберите PDF файл", type=[".pdf",], accept_multiple_files=False)
  
 if pdf_uploaded_file:
