@@ -15,7 +15,6 @@ from pypdf import PdfReader
 
 
 
-st.markdown('OCR сервис дигорского языка')
 
 def define_doc_state(doc):
     img = cv2.imread(doc.name)
