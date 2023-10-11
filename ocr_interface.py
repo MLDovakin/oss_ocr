@@ -16,7 +16,7 @@ from pypdf import PdfReader
 
 
 
-st.markdown("<h1 style='text-align: start; color: black;'>OCR дигорского языка</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: start;'>OCR дигорского языка</h1>", unsafe_allow_html=True)
 st.subhead('Конвертирование изображения в текст')
 
 def define_doc_state(doc):
