@@ -15,6 +15,7 @@ from pypdf import PdfReader
 
 
 
+st.title('OCR сервис дигорского языка')
 
 def define_doc_state(doc):
     img = cv2.imread(doc.name)
@@ -53,7 +54,7 @@ if uploaded_file:
 
          #st.image(res_image, caption='Detection')
 
-st.write('Перевод PDF/DJVU файлов в текстовый документ')
+st.title('Конвертирование PDF, DjVu в формат txt')
 
 pdf_uploaded_file = st.file_uploader("Выберите PDF файл", type=[".pdf",], accept_multiple_files=False)
  
