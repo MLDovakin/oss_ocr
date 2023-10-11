@@ -33,8 +33,19 @@ def define_doc_state(doc):
     st.image(img, caption='Detection')
 
     result = reader.readtext(doc.name)
+    tt = []
+    
     for i in result:
-      st.write(i[1].replace('~',' ').replace('-',','))
+      tt.append(i[1].replace('~',' '))
+        
+    for i in range(len(tt)-1):
+      if tt[i][-1] == '-':
+          tt[i] = tt[i].replace('-', '') + tt[i+1]
+          tt[i+1] = ''
+          
+    tt = [i for i in tt if i != ''] 
+    st.write(' '.join(tt))
+    
     torch.cuda.empty_cache()
     gc.collect()
     del model, reader 
