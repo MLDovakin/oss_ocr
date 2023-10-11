@@ -17,7 +17,7 @@ from pypdf import PdfReader
 
 
 st.markdown("<h1 style='text-align: start; font-size:35px; font-weight: normal;'>OCR дигорского языка</h1>", unsafe_allow_html=True)
-st.subheader('Конвертирование изображения в текст')
+st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
 
 def define_doc_state(doc):
     img = cv2.imread(doc.name)
