@@ -10,6 +10,7 @@ import torch
 import easyocr
 import numpy as np
 import gc
+from pypdf import PdfReader
 
 
 
