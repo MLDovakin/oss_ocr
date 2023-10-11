@@ -37,7 +37,8 @@ def define_doc_state(doc):
     
     for i in result:
       tt.append(i[1].replace('~',' '))
-    st.write(tt)
+        
+    st.write(tt, type(tt))
     for i in range(len(tt)-1):
       if tt[i][-1] == '-':
           tt[i] = tt[i].replace('-', '') + tt[i+1]
