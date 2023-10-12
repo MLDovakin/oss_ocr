@@ -40,7 +40,6 @@ def define_doc_state(doc):
     
     for i in range(len(tt) - 1):
         try:
-            print(tt[i],tt[i+1])
             if i != '':
                 if tt[i][-1] == '-':
                     tt[i] = tt[i].replace('-', '') + tt[i + 1]
