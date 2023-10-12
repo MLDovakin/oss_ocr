@@ -37,7 +37,7 @@ def define_doc_state(doc):
     ##у  меня 3 ночи и я хочу блять спать поэтому тут такое говно утром нормально сделаю
     for i in result:
         tt.append(i[1].replace('~', ' ').replace('-', ', ').replace('/', '-').replace(';', ''))
-    st.write(tt)
+    
     for i in range(len(tt) - 1):
         try:
             print(tt[i],tt[i+1])
