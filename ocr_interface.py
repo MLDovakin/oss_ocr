@@ -14,9 +14,6 @@ from pypdf import PdfReader
 
 
 
-
-st.image(Image.open('new_logo.png'))
-
 st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
 
