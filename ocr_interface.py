@@ -34,7 +34,7 @@ def define_doc_state(doc):
 
     result = reader.readtext(doc.name)
     tt = []
-    ##у  меня 3 ночи и я хочу  спать поэтому тут такое говно утром нормально сделаю
+    ##у  меня 3 ночи и я хочу блять спать поэтому тут такое говно утром нормально сделаю
     for i in result:
         tt.append(i[1].replace('~', ' ').replace('-', ', ').replace('/', '-').replace(';', ''))
     st.write(tt)
