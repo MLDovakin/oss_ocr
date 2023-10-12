@@ -34,15 +34,19 @@ def define_doc_state(doc):
 
     result = reader.readtext(doc.name)
     tt = []
-    
+    ##у  меня 3 ночи и я хочу  спать поэтому тут такое говно утром нормально сделаю
     for i in result:
-      tt.append(i[1].replace('~',' ').replace('-',',').replace('/','-').replace(';',''))
-        
+        tt.append(i[1].replace('~', ' ').replace('-', ', ').replace('/', '-').replace(';', ''))
+    st.write(tt)
     for i in range(len(tt) - 1):
-        if i != '':
-            if tt[i][-1] == '-':
-                tt[i] = tt[i].replace('-', '') + tt[i + 1]
-                tt[i + 1] = ''
+        try:
+            print(tt[i],tt[i+1])
+            if i != '':
+                if tt[i][-1] == '-':
+                    tt[i] = tt[i].replace('-', '') + tt[i + 1]
+                    tt[i + 1] = ''
+        except IndexError:
+            pass
             
     tt = [i for i in tt if i != ''] 
     st.write(' '.join(tt))
