@@ -30,28 +30,42 @@ def define_doc_state(doc):
 
     result = reader.readtext(doc.name)
     tt = []
+    
     ##у  меня 3 ночи и я хочу блять спать поэтому тут такое говно утром нормально сделаю
     for i in result:
-        tt.append(i[1].replace('~', ' ').replace('-', ', ').replace('/', '-').replace(';', ''))
-        
+        tt.append(i[1].replace('~', ' ').replace('-', ', ').replace('/', '-'))
+
+    tt = [i.split(' ') for i in tt]
+    tt = [i for i in list(itertools.chain(*tt)) if i !='']
+
     for i in range(len(tt) - 1):
+
         if '.' in tt[i] and tt[i][-1] != '.':
             tt[i] = tt[i].replace('.', '-')
 
+        if ';' in tt[i] and tt[i][-1] == ';' and tt[i + 1][0].isupper() == False:
+            tt[i] = tt[i].replace(';', '-')
+
         if tt[i][-1] == '-' and tt[i + 1][0].isupper():
             tt[i] = tt[i].replace('-', '.')
-            
+
+
     for i in range(len(tt) - 1):
         try:
+
+            print(tt[i],tt[i+1])
             if i != '':
-                if tt[i][-1] == '-':
+                if tt[i][-1] == '-' :
                     tt[i] = tt[i].replace('-', '') + tt[i + 1]
                     tt[i + 1] = ''
         except IndexError:
             pass
-            
-    tt = [i for i in tt if i != ''] 
+    if  tt[-1][-1] == '-':
+        tt[-1] = tt[-1][:-1] + '.'
+
+    tt = [i for i in tt if i != '']
     st.write(' '.join(tt))
+    
     torch.cuda.empty_cache()
     gc.collect()
     del model, reader 
