@@ -34,7 +34,14 @@ def define_doc_state(doc):
     ##у  меня 3 ночи и я хочу блять спать поэтому тут такое говно утром нормально сделаю
     for i in result:
         tt.append(i[1].replace('~', ' ').replace('-', ', ').replace('/', '-').replace(';', ''))
-    
+        
+    for i in range(len(tt) - 1):
+        if '.' in tt[i] and tt[i][-1] != '.':
+            tt[i] = tt[i].replace('.', '-')
+
+        if tt[i][-1] == '-' and tt[i + 1][0].isupper():
+            tt[i] = tt[i].replace('-', '.')
+            
     for i in range(len(tt) - 1):
         try:
             if i != '':
