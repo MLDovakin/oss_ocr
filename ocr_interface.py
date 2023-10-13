@@ -1,4 +1,3 @@
-import PIL
 from pathlib import Path
 import streamlit as st
 import easyocr
@@ -10,6 +9,7 @@ import torch
 import easyocr
 import numpy as np
 import gc
+import re
 from pypdf import PdfReader
 import itertools
 
@@ -104,6 +104,8 @@ if pdf_uploaded_file:
     for i in range(0, number_of_pages):
       page = pdf_reader.pages[i]
       text +=  page.extract_text().replace('ё','ӕ').replace('Ё','Ӕ')
+        
+    text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
     st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf','.txt'),)
     del text
     del pdf_reader
