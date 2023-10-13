@@ -11,7 +11,7 @@ import easyocr
 import numpy as np
 import gc
 from pypdf import PdfReader
-
+import itertools
 
 
 st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
