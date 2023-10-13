@@ -18,7 +18,6 @@ st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСК
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
 
 def define_doc_state(doc):
-    img = cv2.imread(doc.name)
     
     opt=get_config('./en_filtered_config_t.yaml')
     model=load_model('best_accuracy_t.pth',opt=opt)
@@ -27,7 +26,7 @@ def define_doc_state(doc):
                             model_storage_directory='model',
                             user_network_directory='user_network',
                             recog_network='custom_example')
-    st.image(img, caption='Detection')
+    st.image(doc.name, caption='Detection')
 
     result = reader.readtext(doc.name)
     tt = []
