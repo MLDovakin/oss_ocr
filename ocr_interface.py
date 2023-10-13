@@ -65,7 +65,7 @@ def define_doc_state(doc):
         tt[-1] = tt[-1][:-1] + '.'
 
     tt = [i for i in tt if i != '']
-    st.write(' '.join(tt.replace(';')))
+    st.write(' '.join(tt.replace(';','')))
 
     torch.cuda.empty_cache()
     gc.collect()
