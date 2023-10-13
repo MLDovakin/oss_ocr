@@ -20,7 +20,7 @@ st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'
 def define_doc_state(doc):
 
     opt = get_config('./en_filtered_config_t.yaml')
-    model = load_model('best_accuracy_t.pth', opt=opt)
+    model = load_model('best_accuracy_t2.pth', opt=opt)
 
     reader = easyocr.Reader(['ru'],
                             model_storage_directory='model',
