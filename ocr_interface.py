@@ -99,12 +99,17 @@ def reflow(infile, outfile):
         holdover = ""
         for line in source.readlines():
             line = line.strip()
+            print(line)
             if line.endswith("-") or line.endswith('–') or line.endswith(' -') \
                     or line.endswith(' –') or line.endswith(' – ') or line.endswith(' - ') \
                     or line.endswith('- ') or line.endswith('– '):
+
                 lin, _, e = line.rpartition(" ")
+                lin = lin.rstrip("\n")
+
             else:
                 lin, e = line, ""
+                
             dest.write(f"{holdover}{lin}\n")
             holdover = e[:-1].replace(' ','')
             
