@@ -92,6 +92,19 @@ if uploaded_file:
 
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование PDF, DjVu в формат TXT</h1>", unsafe_allow_html=True)
 
+def reflow(infile, outfile):
+    with open(infile) as source, open(outfile, "w") as dest:
+        source = infile
+        dest = outfile
+        holdover = ""
+        for line in source.split():
+            line = line.rstrip("\n")
+            if line.endswith(" -") or line.endswith(' –') or line.endswith('-') or line.endswith('–'):
+                lin, _, e = line.rpartition(" ")
+            else:
+                lin, e = line, ""
+            dest += f"{holdover}{lin}\n"
+            holdover = e[:-1]
 
 pdf_uploaded_file = st.file_uploader("Выберите PDF, DjVu файл", type=[".pdf", ], accept_multiple_files=False)
 
@@ -112,12 +125,12 @@ if pdf_uploaded_file:
     with open('source.txt', 'w', encoding='utf-8') as f:
         f.write('\n'.join(text))
     reflow('source.txt','dest.txt')
-    text = open('dest.txt', encoding='utf-8').readlines(
-        
+    text = open('dest.txt', encoding='utf-8').readlines()
+
     st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
     os.remove('source.txt')
     os.remove('dest.txt')
     del text
     del pdf_reader
     del number_of_pages
-    
+
