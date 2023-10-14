@@ -104,7 +104,7 @@ def reflow(infile, outfile):
             else:
                 lin, e = line, ""
             dest.write(f"{holdover}{lin}\n")
-            holdover = e[:-1]
+            holdover = e[:-1].replace(' ','')
             
 if pdf_uploaded_file:
     open('dest.txt', 'a').close()
