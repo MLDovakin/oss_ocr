@@ -92,25 +92,22 @@ if uploaded_file:
 
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование PDF, DjVu в формат TXT</h1>", unsafe_allow_html=True)
 
+pdf_uploaded_file = st.file_uploader("Выберите PDF, DjVu файл", type=[".pdf", ], accept_multiple_files=False)
+
 def reflow(infile, outfile):
-    with open(infile) as source, open(outfile, "w") as dest:
-        source = infile
-        dest = outfile
+    with open(infile, encoding='utf-8',errors='ignore') as source, open(outfile, "w",encoding='utf-8',errors='ignore') as dest:
         holdover = ""
-        for line in source.split():
+        for line in source.readlines():
             line = line.rstrip("\n")
-            if line.endswith(" -") or line.endswith(' –') or line.endswith('-') or line.endswith('–'):
+            if line.endswith("-"):
                 lin, _, e = line.rpartition(" ")
             else:
                 lin, e = line, ""
-            dest += f"{holdover}{lin}\n"
+            dest.write(f"{holdover}{lin}\n")
             holdover = e[:-1]
-
-pdf_uploaded_file = st.file_uploader("Выберите PDF, DjVu файл", type=[".pdf", ], accept_multiple_files=False)
-
+            
 if pdf_uploaded_file:
-
-    os.mkfile('dest.txt')
+    open('dest.txt', 'a').close()
 
     with open(pdf_uploaded_file.name, 'wb') as f:
         f.write(pdf_uploaded_file.read())
@@ -122,10 +119,12 @@ if pdf_uploaded_file:
         page = pdf_reader.pages[i]
         text += page.extract_text().replace('ё', 'ӕ').replace('Ё', 'Ӕ')
 
-    with open('source.txt', 'w', encoding='utf-8') as f:
-        f.write('\n'.join(text))
+    with open('source.txt', 'w', encoding='utf-8',errors='ignore') as f:
+        f.write(text)
+
     reflow('source.txt','dest.txt')
-    text = open('dest.txt', encoding='utf-8').readlines()
+
+    text = open('dest.txt', encoding='utf-8',errors='ignore').read()
 
     st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
     os.remove('source.txt')
@@ -133,4 +132,3 @@ if pdf_uploaded_file:
     del text
     del pdf_reader
     del number_of_pages
-
