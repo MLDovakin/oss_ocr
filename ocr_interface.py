@@ -99,7 +99,7 @@ def reflow(infile, outfile):
         holdover = ""
         for line in source.readlines():
             line = line.rstrip("\n")
-            if line.endswith("-"):
+            if line.endswith("-") or line.endswith('–') or line.endswith(' -') or line.endswith(' –'):
                 lin, _, e = line.rpartition(" ")
             else:
                 lin, e = line, ""
