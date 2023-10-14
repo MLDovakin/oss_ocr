@@ -92,9 +92,13 @@ if uploaded_file:
 
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование PDF, DjVu в формат TXT</h1>", unsafe_allow_html=True)
 
-pdf_uploaded_file = st.file_uploader("Выберите PDF, DjVu файл", type=[".pdf",], accept_multiple_files=False)
- 
+
+pdf_uploaded_file = st.file_uploader("Выберите PDF, DjVu файл", type=[".pdf", ], accept_multiple_files=False)
+
 if pdf_uploaded_file:
+
+    os.mkfile('dest.txt')
+
     with open(pdf_uploaded_file.name, 'wb') as f:
         f.write(pdf_uploaded_file.read())
     pdf_reader = PdfReader(pdf_uploaded_file.name)
@@ -102,11 +106,18 @@ if pdf_uploaded_file:
     number_of_pages = len(pdf_reader.pages)
     text = ''
     for i in range(0, number_of_pages):
-      page = pdf_reader.pages[i]
-      text +=  page.extract_text().replace('ё','ӕ').replace('Ё','Ӕ')
+        page = pdf_reader.pages[i]
+        text += page.extract_text().replace('ё', 'ӕ').replace('Ё', 'Ӕ')
+
+    with open('source.txt', 'w', encoding='utf-8') as f:
+        f.write('\n'.join(text))
+    reflow('source.txt','dest.txt')
+    text = open('dest.txt', encoding='utf-8').readlines(
         
-    text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
-    st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf','.txt'),)
+    st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
+    os.remove('source.txt')
+    os.remove('dest.txt')
     del text
     del pdf_reader
     del number_of_pages
+    
