@@ -136,6 +136,8 @@ if pdf_uploaded_file:
     st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
     os.remove('source.txt')
     os.remove('dest.txt')
+    gc.collect()
+
     del text
     del pdf_reader
     del number_of_pages
