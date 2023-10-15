@@ -72,7 +72,7 @@ def define_doc_state(doc):
     del model, reader
 
 
-uploaded_file = st.file_uploader("Выберите изображение", type=["", ".jpg", ".png",], accept_multiple_files=False)
+uploaded_file = st.file_uploader("Выберите изображение", type=[".jpg", ".png",], accept_multiple_files=False)
 if uploaded_file:
     st.success("Файл успешно загружен", icon="✅")
     define_button_state = st.button("Определить")
