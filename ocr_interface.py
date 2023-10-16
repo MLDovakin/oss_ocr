@@ -150,12 +150,9 @@ if pdf_uploaded_file:
         os.remove(pdf_uploaded_file.name) 
         
     if pdf_uploaded_file.name.endswith('.djvu'):
-        subprocess.run(('djvutxt', f'{pdf_uploaded_file.name}', 'DK.txt'))
-        os.rename('DK.txt', f'{str(pdf_uploaded_file.name).replace(".djvu",".txt")}')
-        
-        text = open(f'{str(pdf_uploaded_file.name).replace(".djvu",".txt")}',encoding='utf-8').read()
-        st.write(text)
-        st.download_button('Скачать текст', text, file_name=f'{str(pdf_uploaded_file.name).replace(".djvu",".txt")}' )
+        subprocess.run(('djvutxt', f'{pdf_uploaded_file.name}',  f'DK.txt'))
+        text = open('DK.txt', encoding='utf-8').read()
+        st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.djvu', '.txt'), )
         del text
-        os.remove(pdf_uploaded_file.name.replace('.djvu', '.txt'))
+        os.remove('DK.txt')
         os.remove(pdf_uploaded_file.name) 
