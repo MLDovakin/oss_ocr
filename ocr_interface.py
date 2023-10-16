@@ -145,7 +145,7 @@ if pdf_uploaded_file:
 
     else:
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
-        st.write(type(pdf_uploaded_file), type(pdf_upload_file))
+        st.write(type(pdf_uploaded_file), type(pdf_uploaded_file))
         pdf_uploaded_file.name = pdf_uploaded_file.name.replace('.djvu','.pdf')
 
         text = prep_pdf(pdf_uploaded_file.name.replace('.djvu','.pdf'))
