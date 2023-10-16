@@ -144,8 +144,7 @@ if pdf_uploaded_file:
 
     else:
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
-        pdf_uploaded_file.name = pdf_uploaded_file.name.replace('.djvu','.pdf')
-        text = prep_pdf(pdf_uploaded_file)
+        text = prep_pdf(pdf_uploaded_file.name.replace('.djvu','.pdf'))
         text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
 
