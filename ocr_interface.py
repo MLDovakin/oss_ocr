@@ -80,7 +80,6 @@ if uploaded_file:
     define_button_state = st.button("Определить")
     save_folder = os.getcwd()
     save_path = uploaded_file.name
-    print(save_path)
     img_arr = cv2.imdecode(np.frombuffer(uploaded_file.getvalue(), np.uint8), cv2.IMREAD_UNCHANGED,)
     cv2.imwrite(save_path, img_arr)
     
@@ -101,7 +100,6 @@ def reflow(infile, outfile):
         holdover = ""
         for line in source.readlines():
             line = line.strip().replace(' -','-').replace(' –','-')
-            print(line)
             if line.endswith("-") or line.endswith('–') or line.endswith(' -') \
                     or line.endswith(' –') or line.endswith(' – ') or line.endswith(' - ') \
                     or line.endswith('- ') or line.endswith('– '):
