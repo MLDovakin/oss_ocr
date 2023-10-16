@@ -115,11 +115,7 @@ def reflow(infile, outfile):
             dest.write(f"{holdover}{lin}\n")
             holdover = e[:-1].replace(' ','')
 
-def prep_pdf(pdf_uploaded_file):
-    open('dest.txt', 'a').close()
-    with open(pdf_uploaded_file.name, 'wb') as f:
-        f.write(pdf_uploaded_file.read())
-    pdf_reader = PdfReader(pdf_uploaded_file.name)
+def prep_pdf(pdf_reader):
 
     number_of_pages = len(pdf_reader.pages)
     text = ''
@@ -137,18 +133,26 @@ def prep_pdf(pdf_uploaded_file):
             
 
 if pdf_uploaded_file:
+    
     if pdf_uploaded_file.name.endswith('.pdf'):
-        text = prep_pdf(pdf_uploaded_file)
+        
+        open('dest.txt', 'a').close()
+        with open(pdf_uploaded_file.name, 'wb') as f:
+            f.write(pdf_uploaded_file.read())
+        pdf_reader = PdfReader(pdf_uploaded_file.name)
+
+        text = prep_pdf(pdf_reader)
         text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
         del text
 
     else:
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
-        st.write(type(pdf_uploaded_file), type(pdf_uploaded_file))
-        pdf_uploaded_file.name = pdf_uploaded_file.name.replace('.djvu','.pdf')
 
-        text = prep_pdf(pdf_uploaded_file.name.replace('.djvu','.pdf'))
+        open('dest.txt', 'a').close()
+        pdf_reader = PdfReader(pdf_uploaded_file.name.replace(".djvu",".pdf"))
+        
+        text = prep_pdf(pdf_uploaded_file.name)
         text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
         st.write(traceback.print_exception(*sys.exc_info()))
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
