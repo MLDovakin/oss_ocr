@@ -98,7 +98,6 @@ pdf_uploaded_file = st.file_uploader("Выберите PDF, DjVu файл", type
 def reflow(infile, outfile):
     with open(infile, encoding='utf-8',errors='ignore') as source, open(outfile, "w",encoding='utf-8',errors='ignore') as dest:
         holdover = ""
-        st.write('3')
         for line in source.readlines():
             st.write(line)
 
@@ -127,7 +126,6 @@ def prep_pdf(pdf_reader):
         f.write(text)
 
     reflow('source.txt','dest.txt')
-    st.write(2)
 
     text = open('dest.txt', encoding='utf-8',errors='ignore').read()
     st.write(text)
@@ -152,16 +150,10 @@ if pdf_uploaded_file:
         os.remove(pdf_uploaded_file.name) 
         
     if pdf_uploaded_file.name.endswith('.djvu'):
-        
-        subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
+        subprocess.run(('djvutxt', f'{pdf_uploaded_file.name}',  f'{pdf_uploaded_file.name.replace(".djvu",".txt")}'))
+        text = open(f'{pdf_uploaded_file.name.replace(".djvu",".txt")}',encoding='utf-8').read()
 
-        open('dest.txt', 'a').close()
-        pdf_reader = PdfReader(pdf_uploaded_file.name.replace(".djvu",".pdf"))
-        st.write(os.listdir())
-        text = prep_pdf(pdf_reader)
-        st.write(text)
-        st.write(1)
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.djvu', '.txt'), )
         del text
-        os.remove(pdf_uploaded_file.name.replace('.djvu', '.pdf'))
+        os.remove(pdf_uploaded_file.name.replace('.djvu', '.txt'))
         os.remove(pdf_uploaded_file.name) 
