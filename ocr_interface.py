@@ -154,6 +154,5 @@ if pdf_uploaded_file:
         
         text = prep_pdf(pdf_reader)
         text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
-        st.write(traceback.print_exception(*sys.exc_info()))
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
 
