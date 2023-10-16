@@ -124,6 +124,7 @@ def prep_pdf(pdf_reader):
         f.write(text)
 
     reflow('source.txt','dest.txt')
+    st.write(2)
 
     text = open('dest.txt', encoding='utf-8',errors='ignore').read()
     st.write(text)
@@ -155,7 +156,9 @@ if pdf_uploaded_file:
         pdf_reader = PdfReader(pdf_uploaded_file.name.replace(".djvu",".pdf"))
         st.write(os.listdir())
         text = prep_pdf(pdf_reader)
+        st.write(text)
+        st.write(1)
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.djvu', '.txt'), )
         del text
-        os.remove(pdf_uploaded_file.name.replace('.djvu', '.txt'))
+        os.remove(pdf_uploaded_file.name.replace('.djvu', '.pdf'))
         os.remove(pdf_uploaded_file.name) 
