@@ -12,7 +12,7 @@ import gc
 import re
 from pypdf import PdfReader
 import itertools
-
+import subprocess
 
 st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
@@ -112,8 +112,8 @@ def reflow(infile, outfile):
                 
             dest.write(f"{holdover}{lin}\n")
             holdover = e[:-1].replace(' ','')
-            
-if pdf_uploaded_file:
+
+def prep_pdf(pdf_uploaded_file):
     open('dest.txt', 'a').close()
 
     with open(pdf_uploaded_file.name, 'wb') as f:
@@ -132,12 +132,20 @@ if pdf_uploaded_file:
     reflow('source.txt','dest.txt')
 
     text = open('dest.txt', encoding='utf-8',errors='ignore').read()
+    return text
+            
 
-    st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
-    os.remove('source.txt')
-    os.remove('dest.txt')
-    gc.collect()
+if pdf_uploaded_file:
+    if pdf_uploaded_file.name.endswith('.pdf'):
+        text = prep_pdf(pdf_uploaded_file)
+        text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
+        st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
+        del text
 
-    del text
-    del pdf_reader
-    del number_of_pages
+    else:
+        subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
+        pdf_uploaded_file.name = pdf_uploaded_file.name.replace('.djvu','.pdf')
+        text = prep_pdf(pdf_uploaded_file)
+        text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
+        st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
+
