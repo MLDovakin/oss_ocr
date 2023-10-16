@@ -145,7 +145,9 @@ if pdf_uploaded_file:
         text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
         del text
-
+        os.remove(pdf_uploaded_file.name.replace('.djvu', '.txt'))
+        os.remove(pdf_uploaded_file.name) 
+        
     if pdf_uploaded_file.name.endswith('.djvu'):
         
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
@@ -154,6 +156,7 @@ if pdf_uploaded_file:
         pdf_reader = PdfReader(pdf_uploaded_file.name.replace(".djvu",".pdf"))
         st.write(os.listdir())
         text = prep_pdf(pdf_reader)
-        text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.djvu', '.txt'), )
         del text
+        os.remove(pdf_uploaded_file.name.replace('.djvu', '.txt'))
+        os.remove(pdf_uploaded_file.name) 
