@@ -132,8 +132,8 @@ def prep_pdf(pdf_reader):
 
 if pdf_uploaded_file:
     
-   with open(pdf_uploaded_file.name, 'wb') as f:
-        f.write(pdf_uploaded_file.read())
+    with open(pdf_uploaded_file.name, 'wb') as f:
+         f.write(pdf_uploaded_file.read())
        
     if pdf_uploaded_file.name.endswith('.pdf'):
         
