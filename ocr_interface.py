@@ -145,6 +145,10 @@ if pdf_uploaded_file:
         del text
 
     else:
+        
+        with open(pdf_uploaded_file.name, 'wb') as f:
+            f.write(pdf_uploaded_file.read())
+            
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
 
         open('dest.txt', 'a').close()
