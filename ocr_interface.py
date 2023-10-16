@@ -120,7 +120,7 @@ def prep_pdf(pdf_reader):
     for i in range(0, number_of_pages):
         page = pdf_reader.pages[i]
         text += page.extract_text().replace('ё', 'ӕ').replace('Ё', 'Ӕ')
-
+    st.write(text)
     with open('source.txt', 'w', encoding='utf-8',errors='ignore') as f:
         f.write(text)
 
