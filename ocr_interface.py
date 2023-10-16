@@ -146,7 +146,7 @@ if pdf_uploaded_file:
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
         del text
 
-    else:
+    if pdf_uploaded_file.name.endswith('.djvu'):
         
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
 
