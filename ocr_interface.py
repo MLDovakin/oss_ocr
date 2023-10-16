@@ -117,7 +117,7 @@ def reflow(infile, outfile):
 
 def prep_pdf(pdf_uploaded_file):
     open('dest.txt', 'a').close()
-
+    pdf_uploaded_file.name = pdf_uploaded_file.name.replace('.djvu','.pdf')
     with open(pdf_uploaded_file.name, 'wb') as f:
         f.write(pdf_uploaded_file.read())
     pdf_reader = PdfReader(pdf_uploaded_file.name)
