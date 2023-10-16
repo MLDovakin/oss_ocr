@@ -13,6 +13,8 @@ import re
 from pypdf import PdfReader
 import itertools
 import subprocess
+import traceback 
+
 
 st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
@@ -146,5 +148,6 @@ if pdf_uploaded_file:
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
         text = prep_pdf(pdf_uploaded_file.name.replace('.djvu','.pdf'))
         text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
+        st.write(traceback.print_exception(*sys.exc_info()))
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
 
