@@ -135,7 +135,7 @@ if pdf_uploaded_file:
     if pdf_uploaded_file.name.endswith('.pdf'):
         
         open('dest.txt', 'a').close()
-        with open(pdf_uploaded_file.name, 'wb', encoding='utf-8') as f:
+        with open(pdf_uploaded_file.name, 'wb') as f:
             f.write(pdf_uploaded_file.read())
         pdf_reader = PdfReader(pdf_uploaded_file.name)
 
@@ -146,7 +146,7 @@ if pdf_uploaded_file:
 
     else:
         
-        with open(pdf_uploaded_file.name, 'wb', encoding='utf-8') as f:
+        with open(pdf_uploaded_file.name, 'wb,) as f:
             f.write(pdf_uploaded_file.read())
             
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
