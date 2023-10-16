@@ -132,7 +132,7 @@ def prep_pdf(pdf_reader):
 
 if pdf_uploaded_file:
     
-    if pdf_uploaded_file.name.endwith('.pdf'):
+    if pdf_uploaded_file.name.endswith('.pdf'):
         
         open('dest.txt', 'a').close()
         with open(pdf_uploaded_file.name, 'wb') as f:
