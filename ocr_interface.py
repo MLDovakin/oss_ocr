@@ -117,7 +117,6 @@ def reflow(infile, outfile):
 
 def prep_pdf(pdf_uploaded_file):
     open('dest.txt', 'a').close()
-    pdf_uploaded_file.name = pdf_uploaded_file.name.replace('.djvu','.pdf')
     with open(pdf_uploaded_file.name, 'wb') as f:
         f.write(pdf_uploaded_file.read())
     pdf_reader = PdfReader(pdf_uploaded_file.name)
@@ -146,6 +145,9 @@ if pdf_uploaded_file:
 
     else:
         subprocess.run(['ddjvu', '-format=pdf', f'{pdf_uploaded_file.name}', f'{pdf_uploaded_file.name.replace(".djvu",".pdf")}'])
+        st.write(type(pdf_uploaded_file), type(pdf_upload_file))
+        pdf_uploaded_file.name = pdf_uploaded_file.name.replace('.djvu','.pdf')
+
         text = prep_pdf(pdf_uploaded_file.name.replace('.djvu','.pdf'))
         text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
         st.write(traceback.print_exception(*sys.exc_info()))
