@@ -16,31 +16,6 @@ import itertools
 import subprocess
 import traceback 
 
-components.html(
-    """
-        <!-- Primary Meta Tags -->
-        <title>Дигорский OCR</title>
-        <meta name="title" content="Дигорский OCR" />
-        <meta name="description" content="Распознавание текста для дигорского языка" />
-        
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://digor-ocr.streamlit.app" />
-        <meta property="og:title" content="Дигорский OCR" />
-        <meta property="og:description" content="Распознавание текста для дигорского языка" />
-        <meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
-        
-        <!-- Twitter -->
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://digor-ocr.streamlit.app" />
-        <meta property="twitter:title" content="Дигорский OCR" />
-        <meta property="twitter:description" content="Распознавание текста для дигорского языка" />
-        <meta property="twitter:image" content="https://ibb.co/94wVY60" />
-        
-        <!-- Meta Tags Generated with https://metatags.io -->
-    """,
-    height=600,
-)
 
 st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
