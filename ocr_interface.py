@@ -2,9 +2,10 @@ from pathlib import Path
 import streamlit as st
 import easyocr
 import os
-from PIL import Image
 import cv2
+
 from load_model import load_model, get_config, inference
+import streamlit.components.v1 as components
 import torch
 import easyocr
 import numpy as np
@@ -15,6 +16,17 @@ import itertools
 import subprocess
 import traceback 
 
+components.html(
+    """
+    <meta property="og:title" content="OCR Дигорского языка">
+    <meta property="og:site_name" content="распознавание дигорского текста и перевод изображений текст">
+    <meta property="og:url" content="https://digor-ocr.streamlit.app.html">
+    <meta property="og:description" content="test">
+    <meta property="og:image" content="./to_site.jpg">
+
+    """,
+    height=600,
+)
 
 st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
