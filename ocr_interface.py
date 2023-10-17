@@ -16,6 +16,17 @@ import itertools
 import subprocess
 import traceback 
 
+st.set_page_config(
+    page_title="Ex-stream-ly Cool App",
+    page_icon="🧊",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "# This is a header. This is an *extremely* cool app!"
+    }
+)
 
 st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
