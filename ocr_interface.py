@@ -127,7 +127,6 @@ def prep_pdf(pdf_reader):
     reflow('source.txt','dest.txt')
 
     text = open('dest.txt', encoding='utf-8',errors='ignore').read()
-    st.write(text)
     return text
             
 
@@ -145,7 +144,7 @@ if pdf_uploaded_file:
         text = re.sub(r'-\n(\w+ *)', r'\1\n', text)
         st.download_button('Скачать текст', text, file_name=pdf_uploaded_file.name.replace('.pdf', '.txt'), )
         del text
-        os.remove(pdf_uploaded_file.name.replace('.djvu', '.txt'))
+        os.remove(pdf_uploaded_file.name.replace('.pdf', '.txt'))
         os.remove(pdf_uploaded_file.name) 
         
     if pdf_uploaded_file.name.endswith('.djvu'):
