@@ -99,7 +99,6 @@ def reflow(infile, outfile):
     with open(infile, encoding='utf-8',errors='ignore') as source, open(outfile, "w",encoding='utf-8',errors='ignore') as dest:
         holdover = ""
         for line in source.readlines():
-            st.write(line)
 
             line = line.strip().replace(' -','-').replace(' –','-')
             if line.endswith("-") or line.endswith('–') or line.endswith(' -') \
