@@ -15,7 +15,7 @@ from pypdf import PdfReader
 import itertools
 import subprocess
 import traceback 
-
+import pyautogui
 st.markdown("<h1 style='text-align: start; font-size:30px; ;'>OCR ДИГОРСКОГО ЯЗЫКА</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: start; font-size:20px; font-weight: normal;'>Конвертирование изображения в текст</h1>", unsafe_allow_html=True)
 
